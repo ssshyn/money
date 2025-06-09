@@ -22,3 +22,6 @@ spring:
     hibernate:
       ddl-auto: create-drop  # option type: create, create-drop, update, validate, none
     show-sql: true
+swagger:
+  server:
+    url: http://localhost:8080
