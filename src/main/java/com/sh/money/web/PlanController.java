@@ -1,7 +1,9 @@
 package com.sh.money.web;
 
+import com.sh.money.application.plan.command.CreatePaymentCommand;
 import com.sh.money.application.plan.command.CreatePlanCommand;
 import com.sh.money.application.plan.command.PlanCommandHandler;
+import com.sh.money.domain.plan.entity.Payment;
 import com.sh.money.domain.plan.entity.Plan;
 import com.sh.money.domain.plan.response.PlanListDto;
 import com.sh.money.domain.plan.service.PlanQueryService;
@@ -28,5 +30,11 @@ public class PlanController {
     public ResponseEntity<?> createPlan(@RequestBody CreatePlanCommand command) {
         Plan plan = planCommandHandler.handle(command);
         return ResponseEntity.ok(Map.of("id", plan.getId()));
+    }
+
+    @PostMapping("/payment")
+    public ResponseEntity<?> createPayment(@RequestBody CreatePaymentCommand command) {
+        Payment payment = planCommandHandler.handle(command);
+        return ResponseEntity.ok(Map.of("id", payment.getId()));
     }
 }

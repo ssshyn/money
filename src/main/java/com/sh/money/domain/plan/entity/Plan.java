@@ -9,6 +9,8 @@ import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Getter
 @Setter
@@ -32,10 +34,18 @@ public class Plan {
     @Column
     @LastModifiedDate
     private LocalDateTime modifiedAt;
+    @OneToMany(mappedBy = "plan", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Payment> payments = new ArrayList<>();
 
     public static Plan create(CreatePlanCommand command, DomainEventPublisher eventPublisher) {
         Plan plan = Plan.builder().year(command.year()).month(command.month()).createdAt(LocalDateTime.now()).modifiedAt(LocalDateTime.now()).build();
         eventPublisher.publish(new PlanCreatedEvent(plan.getYear(), plan.getMonth()));
         return plan;
+    }
+
+    // 편의 메서드 (양방향 연관관계 설정)
+    public void addPayment(Payment payment) {
+        payments.add(payment);
+        payment.setPlan(this);
     }
 }

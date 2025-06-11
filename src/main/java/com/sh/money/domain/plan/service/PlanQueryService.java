@@ -13,6 +13,8 @@ public class PlanQueryService {
     private final PlanQueryRepository planQueryRepository;
 
     public List<PlanListDto> findAll() {
-        return planQueryRepository.findAll();
+        List<PlanListDto> planListDtos = planQueryRepository.findAll();
+        //todo: 여기에 Payment 리스트도 조회해서 추가 필요....
+        return  planListDtos;
     }
 }
