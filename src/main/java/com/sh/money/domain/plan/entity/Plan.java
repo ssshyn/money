@@ -34,7 +34,7 @@ public class Plan {
     private LocalDateTime modifiedAt;
 
     public static Plan create(CreatePlanCommand command, DomainEventPublisher eventPublisher) {
-        Plan plan = Plan.builder().year(command.year()).month(command.month()).createdAt(LocalDateTime.now()).build();
+        Plan plan = Plan.builder().year(command.year()).month(command.month()).createdAt(LocalDateTime.now()).modifiedAt(LocalDateTime.now()).build();
         eventPublisher.publish(new PlanCreatedEvent(plan.getYear(), plan.getMonth()));
         return plan;
     }
