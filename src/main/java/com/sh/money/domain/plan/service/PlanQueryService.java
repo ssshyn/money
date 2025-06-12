@@ -1,5 +1,6 @@
 package com.sh.money.domain.plan.service;
 
+import com.sh.money.domain.plan.repository.PaymentQueryRepository;
 import com.sh.money.domain.plan.repository.PlanQueryRepository;
 import com.sh.money.domain.plan.response.PlanListDto;
 import lombok.RequiredArgsConstructor;
@@ -11,10 +12,16 @@ import java.util.List;
 @Service
 public class PlanQueryService {
     private final PlanQueryRepository planQueryRepository;
+    private final PaymentQueryRepository paymentQueryRepository;
 
     public List<PlanListDto> findAll() {
         List<PlanListDto> planListDtos = planQueryRepository.findAll();
-        //todo: 여기에 Payment 리스트도 조회해서 추가 필요....
+        planListDtos.forEach(
+                planDto -> {
+                    planDto.setPayments(paymentQueryRepository.findByPlanId(planDto.getId()));
+                }
+        );
+
         return  planListDtos;
     }
 }

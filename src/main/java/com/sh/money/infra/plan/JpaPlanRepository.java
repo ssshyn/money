@@ -1,6 +1,6 @@
 package com.sh.money.infra.plan;
 
-import com.sh.money.core.SpringDataJpaPlanRepository;
+import com.sh.money.infra.plan.jpa.SpringDataJpaPlanRepository;
 import com.sh.money.domain.plan.entity.Plan;
 import com.sh.money.domain.plan.repository.PlanRepository;
 import lombok.AllArgsConstructor;

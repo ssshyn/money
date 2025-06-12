@@ -1,7 +1,5 @@
 package com.sh.money.domain.plan.response;
 
-import com.sh.money.domain.plan.entity.Payment;
-import com.sh.money.domain.plan.entity.Plan;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -19,7 +17,7 @@ public class PlanListDto {
     private Integer year;
     private Integer month;
     private LocalDateTime modifiedAt;
-    private List<Payment> payments;
+    private List<PaymentListDto> payments;
 
     public PlanListDto(Long id, Integer year, Integer month, LocalDateTime modifiedAt) {
         this.id = id;
