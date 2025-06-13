@@ -16,7 +16,7 @@ public class JpaPaymentQueryRepository implements PaymentQueryRepository {
     @Override
     public List<PaymentListDto> findAll() {
         return em.createQuery(
-                "SELECT new com.sh.money.domain.plan.response.PaymentListDto(p.id, p.paymentType, p.amount, p.memo, p.createdAt) FROM Payment p",
+                "SELECT new com.sh.money.domain.plan.response.PaymentListDto(p.id, p.paymentType, p.amount, p.memo, p.paymentDate, p.createdAt) FROM Payment p",
                 PaymentListDto.class
         ).getResultList();
     }
@@ -24,7 +24,7 @@ public class JpaPaymentQueryRepository implements PaymentQueryRepository {
     @Override
     public List<PaymentListDto> findByPlanId(Long planId) {
         return em.createQuery(
-                        "SELECT new com.sh.money.domain.plan.response.PaymentListDto(p.id, p.paymentType, p.amount, p.memo, p.createdAt)" +
+                        "SELECT new com.sh.money.domain.plan.response.PaymentListDto(p.id, p.paymentType, p.amount, p.memo, p.paymentDate, p.createdAt)" +
                                 "FROM Payment p WHERE p.plan.id = :planId",
                         PaymentListDto.class
                 )

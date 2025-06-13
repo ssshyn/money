@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Getter
@@ -18,5 +19,6 @@ public class PaymentListDto {
     private PaymentType paymentType;
     private BigDecimal amount;
     private String memo;
+    private LocalDate paymentDate;
     private LocalDateTime createdAt;
 }

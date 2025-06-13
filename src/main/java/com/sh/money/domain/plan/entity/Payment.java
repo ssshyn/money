@@ -10,6 +10,7 @@ import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Getter
@@ -39,6 +40,9 @@ public class Payment {
     private String memo;
 
     @Column(nullable = false)
+    private LocalDate paymentDate;
+
+    @Column(nullable = false)
     @CreatedDate
     private LocalDateTime createdAt;
 
@@ -53,13 +57,15 @@ public class Payment {
                 .paymentType(command.paymentType())
                 .amount(command.amount())
                 .memo(command.memo())
+                .paymentDate(command.paymentDate())
                 .createdAt(LocalDateTime.now())
                 .modifiedAt(LocalDateTime.now())
                 .build();
         eventPublisher.publish(new PaymentCreatedEvent(payment.getPlan().getId(),
                 payment.getPaymentType(),
                 payment.getAmount(),
-                payment.getMemo()));
+                payment.getMemo(),
+                payment.getPaymentDate()));
         return payment;
     }
 }
